@@ -19,12 +19,19 @@ papir_bilde = pygame.image.load("pictures/papir.png").convert_alpha()
 start_img = pygame.image.load("pictures/start.png").convert_alpha()
 exit_img = pygame.image.load("pictures/exit.png").convert_alpha()
 background_img = pygame.image.load("pictures/background.png").convert_alpha()
+chooseBall_img = pygame.image.load("pictures/chooseBall_Background.png").convert_alpha()
+play_img = pygame.image.load("pictures/playBackground.jpg").convert_alpha()
+win_img = pygame.image.load("pictures/winBackground.png").convert_alpha()
 
 #Bilder i riktig størrelse
 scaled_stein = pygame.transform.scale(stein_bilde, (FELLES_STØRRELSE, FELLES_STØRRELSE))
 scaled_saks = pygame.transform.scale(saks_bilde, (FELLES_STØRRELSE, FELLES_STØRRELSE))
 scaled_papir = pygame.transform.scale(papir_bilde, (FELLES_STØRRELSE, FELLES_STØRRELSE))
 scaled_background = pygame.transform.scale(background_img, (800, 600))
+scaled_chooseBall = pygame.transform.scale(chooseBall_img, (800, 600))
+scaled_play = pygame.transform.scale(play_img, (800, 600))
+scaled_win = pygame.transform.scale(win_img, (800, 600))
+
 
 class Button:
     def __init__(self, x, y, image, scale):
@@ -58,7 +65,7 @@ class Button:
 start_button = Button(125, 225, start_img, 1)
 exit_button = Button((800 - exit_img.get_width() - 125), 225, exit_img, 1)
 
-antall_baller = random.randint(1, 15)
+antall_baller = 15
 
 class Ball:
     def __init__(self, scaled_bilde, tracker, everyone):
@@ -225,8 +232,7 @@ def main():
 
 def draw_play(stein, saks, papir):
 
-    win.fill((0, 0, 0))
-    drawGrid()
+    win.blit(scaled_play, (0, 0))
 
     for idx, val in enumerate(stein):
         val.drawBall()
@@ -282,7 +288,7 @@ def winner(winner_bilde):
                 sys.exit()
 
         clock.tick(FPS)
-        win.fill((0, 0, 0))
+        win.blit(scaled_win, (0, 0))
 
         win.blit(img, ((WIDTH - img.get_width()) // 2, 50))
         win.blit(img2, (67.5, (HEIGHT - 150)))
